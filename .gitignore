@@ -1,0 +1,33 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Build output (made by source/build.py and Blender)
+_mesh/
+out/
+*.blend1
+*.log
+*.log.err
+
+# Not part of this repo
+node_modules/
+tasks/
+.cl[a]ude/
+CL[A]UDE.md
+TONIGHT_CHANGES.txt
+build_guide/
+*.mp4
+source/pp12/
+source/pp_mini.py
+source/video_pp12.py
+stl/arm_*.stl
+stl/knob.stl
+stl/mast.stl
+stl/mast_base.stl
+robot_arm_tank_hull.step
