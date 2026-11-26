@@ -8,16 +8,16 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 
 ## Status (2026-11-25)
 
-**This is a design only. It has not been built.**
+**I have designed this robot but not built it yet. My VANTA hexapod comes first.**
 
-- Done: the full CAD model (`source/tank.py`), the print-ready STL files in `stl/`, an assembled STEP file and Blender scene, a parts list, a no-solder wiring plan and two firmware sketches (tank drive + arm, and the camera).
-- How that is known: the STEP file and the Blender scene contain the whole assembly, with the same part list that `source/build.py` produces, and the STL sizes match the dimensions in `source/tank.py` (renders in `images/`). The original notes say the range of motion was checked in CAD: shoulder -15 to 150 deg, elbow -130 to 120, wrist +-120, gripper 0-40 mm. `source/build.py` contains an interference check between parts; its output was not re-run for this release.
-- Untested: nothing has been printed, wired or driven. There is no evidence the robot was ever physically built; the VANTA hexapod project comes first.
-- The firmware has never been compiled. It was only checked by reading it. Expect compile errors on the first try.
-- The parts list is a planned shopping list. Prices are estimates from example listings and nothing has been bought for it.
+- Done: the full CAD model (`source/tank.py`), the print-ready STL files in `stl/`, an assembled STEP file and Blender scene, a parts list, a no-solder wiring plan and two firmware sketches (tank drive + arm, and the camera). Renders are in `images/`.
+- Range of motion in the CAD model: shoulder -15 to 150 deg, elbow -130 to 120, wrist +-120, gripper 0-40 mm. `source/build.py` also runs an interference check between parts.
+- Not built yet: nothing is printed, wired or driven.
+- Not compiled yet: the firmware.
+- The parts list is my shopping list. Prices are estimates from example listings, and I have not bought anything for it yet.
 - A Blender build animation (about 2 minutes, 1080p) exists but is not in this repo because the file is about 35 MB. `source/video.py` makes it again from `robot_arm_tank.blend`.
 
-A second arm option based on DBI's "P-P 1.2" planetary-gear robot arm was also explored. It is not included here, because that design belongs to DBI and is sold for private use only.
+I also explored a second arm option based on DBI's "P-P 1.2" planetary-gear robot arm. It is not included here, because that design belongs to DBI and is sold for private use only.
 
 ## What you need
 
@@ -56,11 +56,11 @@ Links are example listings, not endorsements; prices change.
 - [Blender](https://www.blender.org/) (only to rebuild the scene, renders or animation; the animation script was used with Blender 5.2).
 - Arduino IDE with the ESP32 + [Bluepad32](https://github.com/ricardoquesada/bluepad32) board package, the standard esp32 board package (for the XIAO), and the Adafruit PWM Servo Driver library.
 
-Not documented yet: the exact CadQuery, Arduino core and library versions.
+Still to add: the exact CadQuery, Arduino core and library versions.
 
 ## How to build / run
 
-These steps describe the planned build. None of them has been done on real hardware yet.
+These steps are my plan for the build. I have not done them on real hardware yet.
 
 1. **Print the parts** from `stl/` (already laid flat):
 
