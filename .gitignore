@@ -15,6 +15,8 @@ out/
 *.log
 *.log.err
 *.mp4
+!pp12-arm-version/build_guide/3_BUILD_VIDEO.mp4
+_mesh_fold/
 
 # Not part of this repo
 node_modules/

@@ -17,7 +17,7 @@ Built by Gio ([Built-By-Gio](https://github.com/Built-By-Gio)).
 - The parts list is my shopping list. Prices are estimates from example listings, and I have not bought anything for it yet.
 - A Blender build animation (about 2 minutes, 1080p) exists but is not in this repo because the file is about 35 MB. `source/video.py` makes it again from `robot_arm_tank.blend`.
 
-I also explored a second arm option based on DBI's "P-P 1.2" planetary-gear robot arm. It is not included here, because that design belongs to DBI and is sold for private use only.
+I also designed a second arm option based on DBI's P-P 1.2 planetary-gear robot arm. It is in `pp12-arm-version/`, see [Second arm option: DBI P-P 1.2](#second-arm-option-dbi-p-p-12).
 
 ## What you need
 
@@ -147,6 +147,13 @@ source/render.py               Blender: imports the meshes, renders views, saves
 source/video.py                Blender: build animation
 firmware/arm_tank/             ESP32-WROOM-32U: Bluepad32 gamepad, PCA9685 servos, ZK-5AD drive
 firmware/camera/               XIAO ESP32S3 Sense: own Wi-Fi network, MJPEG stream page
+pp12-arm-version/              second arm option, based on DBI's P-P 1.2 (separate from everything above)
+  pp12/                        DBI's 14 original STL files, unchanged
+  pp_mini.py                   scales and refits DBI's parts, runs the CAD checks
+  stl/                         14 scaled arm parts (arm_*.stl) + camera mast parts (mast, mast_base, knob)
+  robot_arm_tank_hull.step     hull + camera mast for this version
+  build_guide/                 setup and assembly guide, checklist page, 44 s build animation
+  images/render_folded.png     render of this version
 ```
 
 ## Roadmap / future plans
@@ -161,8 +168,35 @@ firmware/camera/               XIAO ESP32S3 Sense: own Wi-Fi network, MJPEG stre
   5. Extras: tap to grab, follow-me mode, record and replay arm moves.
 - Other ideas: joint angle feedback, soft start for the servos, a battery gauge.
 
+## Second arm option: DBI P-P 1.2
+
+Everything for this version is in `pp12-arm-version/`. The rest of this README is about the lattice arm.
+
+**What it is:** the same tank with DBI's P-P 1.2 planetary-gear arm scaled down to 32/58 (about 55%) so it runs on mini servos, and the camera on a tall folding mast instead of the fender tower.
+
+**How it differs from the lattice arm:**
+- Arm: DBI's link shapes, scaled. The 6809 bearings become 6705ZZ and the M6 screws become M3. At this size the planetary teeth would be too small to print, so the ring gear slides straight onto the 3 pins and a new 19:30 gear pair (module 0.84, 1.58:1) drives each joint from an MG90S. The base MG90S in the lid drives DBI's base gear directly.
+- Gripper: DBI's gripper with each jaw rack 4 teeth longer and each finger 8 mm longer, for about 37 mm maximum opening.
+- Servos: 6x MG90S (base, elbow, wrist, claw, camera pan, camera tilt) and 1x SG90 on the shoulder, all on the PCA9685. Plus 7x 6705ZZ bearings and 3 E-clips. The 20 kg shoulder servo is not used.
+- Camera: on a mast at the rear-left of the lid that folds forward for carrying, locked by a printed knob pin.
+- Estimated cost: about $134 to buy, if you already have the gamepad, PCA9685, TT motors and filament (from my 2026-10-22 build notes for this version).
+
+**What is in the folder:**
+- `pp12/`: DBI's 14 original STL files, unchanged.
+- `pp_mini.py`: my script that scales and refits DBI's parts and checks them on the tank.
+- `stl/`: the 14 scaled arm parts (`arm_*.stl`) and the camera mast parts (`mast`, `mast_base`, `knob`).
+- `robot_arm_tank_hull.step`: the hull and camera mast for this version (the arm is not in it).
+- `build_guide/`: a step-by-step setup and assembly guide, a 12-phase checklist page (`2_BUILD_PROCESS.html`) and a 44-second build animation.
+- `images/render_folded.png`: render of this version.
+
+**Status (2026-11-26): designed, not built yet.**
+- Done: the scaled arm parts, the mast parts, the hull STEP, the guide and the animation. In October `pp_mini.py` found no clashes at home, every joint clear at its limits, base yaw +-80 deg clear, a clear camera view of the fingertips and the floor ahead, and a clear mast fold.
+- Not done yet: the firmware for this version is not in this repo (the sketches in `firmware/` are for the lattice arm). The hull parts for this version only exist inside `robot_arm_tank_hull.step`, with no separate STLs. `pp_mini.py` needs the version of `tank.py` and `build.py` it was written for, which is not in this repo, so it does not run as-is. I have not checked the E-clip size.
+
 ## Credits and license
 
 Design, CAD and firmware by Gio. Uses [CadQuery](https://github.com/CadQuery/cadquery), [Blender](https://www.blender.org/), [Bluepad32](https://github.com/ricardoquesada/bluepad32), the Adafruit PWM Servo Driver library and the Espressif ESP32 Arduino core; none of them is included in this repo.
 
-Released under the MIT License, see `LICENSE`.
+The P-P 1.2 planetary-gear robot arm is designed by Dynabot Innovations (DBI); their original files and my parts derived from them in `pp12-arm-version/` are included with DBI's permission (PERMISSION_DATE) (https://github.com/DynaBotInnovations/Roboter-Arm-P-P-1.0-Bus-Servo).
+
+License: my own design and code are released under the MIT License, see `LICENSE`. DBI's files in `pp12-arm-version/pp12/` and the parts derived from them (`pp12-arm-version/stl/arm_*.stl`) are not covered by the MIT License; they stay under DBI's terms and are shared here with DBI's permission.
